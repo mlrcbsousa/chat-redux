@@ -13,9 +13,6 @@ class MessageList extends Component {
     super(props);
     // create a ref to store the DOM element
     this.messageList = null;
-    this.setMessageListRef = (element) => {
-      this.messageList = element;
-    };
   }
 
   componentWillMount() {
@@ -35,18 +32,22 @@ class MessageList extends Component {
   }
 
   render() {
-    const { messages } = this.props;
+    const { messages, selectedChannel } = this.props;
 
     return (
-      <div className="message-list col-sm-8" ref={this.setMessageListRef}>
-        {messages.map(message => <Message key={message.created_at} message={message} />)}
+      <div className="channel-container">
+        <div className="channel-title">
+          <span>Channel #{selectedChannel}</span>
+        </div>
+        <div className="channel-content" ref={(element) => { this.messageList = element; }}>
+          {messages.map(message => <Message key={message.created_at} message={message} />)}
+        </div>
         <MessageForm />
       </div>
     );
   }
 }
 
-// binds action to props, making it available
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     { fetchMessages },

@@ -29,25 +29,27 @@ class MessageForm extends Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     const { channel, author, createMessage } = this.props;
     const { value } = this.state;
     createMessage(channel, author, value);
     this.setState({ value: '' });
-    event.preventDefault();
   }
 
 
   render() {
     const { value } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="channel-editor">
         <input
           type="text"
           value={value}
+          className="form-control"
+          autoComplete="off"
           onChange={this.handleChange}
           ref={this.setMessageInputRef}
         />
-        <input type="submit" value="Submit" />
+        <button type="submit">Send</button>
       </form>
     );
   }

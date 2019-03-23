@@ -17,19 +17,20 @@ class ChannelList extends Component {
     const { channels, selectedChannel, selectChannel } = this.props;
 
     return (
-      <div className="message-list col-sm-3">
-        {channels.map((channel) => {
-          let classes = "channel";
-          if (channel === selectedChannel) { classes += " selected"; }
-
-          return (
-            <li
-              key={channel}
-              onClick={() => selectChannel(channel)}
-              className={classes}
-            >#{channel}</li>
-          );
-        })}
+      <div className="channels-container">
+        <span>Redux Chat</span>
+        <ul>
+          {channels.map((channel) => {
+            return (
+              <li
+                key={channel}
+                onClick={() => selectChannel(channel)}
+                className={channel === selectedChannel ? 'active' : null}
+                role="presentation"
+              >#{channel}</li>
+            );
+          })}
+        </ul>
       </div>
     );
   }

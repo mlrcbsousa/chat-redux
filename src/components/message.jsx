@@ -22,11 +22,13 @@ const intToRGB = (i) => {
 const Message = ({ message }) => {
   const { author, content, created_at } = message;
   return (
-    <div>
-      <strong
-        style={{ color: `#${intToRGB(hashCode(author))}` }}
-      >{author}</strong>&nbsp;<span>{created_at.slice(11, 19)}</span>
-      <div>{emojify(content)}</div>
+    <div className="message-container">
+      <i className="author">
+        <span
+          style={{ color: `#${intToRGB(hashCode(author))}` }}
+        >{author}</span>&nbsp;<small>{created_at.slice(11, 19)}</small>
+      </i>
+      <p>{emojify(content)}</p>
     </div>
   );
 };
